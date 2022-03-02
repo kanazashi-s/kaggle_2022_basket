@@ -1,14 +1,20 @@
 from utils.mlflow import MlflowWriter
 from utils.cfg_yaml import load_config
 
+import data.make_dataset
+import features
+
 
 def main():
     cfg = load_config('src/config/001.yaml')
     EXPERIMENT_NAME = 'kaggle_basket_first'
     writer = MlflowWriter(EXPERIMENT_NAME)
 
-    train_base_df = create_train_base_df.main()
-    test_base_df = create_test_base_df.main()
+    if cfg['main']['create_data'] == True:
+        data.make_dataset.main()
+
+    train_base_df = features.read_base_df.read_train()
+    test_base_df = features.read_base_df.read_test()
     feature_list = [
         'use_feature_1',
         'use_feature_2',
