@@ -5,7 +5,7 @@ import pandas as pd
 def make_train():
     input_path = Path("data", "raw", "MDataFiles_Stage1")
     output_path = Path("data", "processed")
-    cols = ['Season', 'DayNum', 'WTeamID', 'LTeamID']
+    cols = ['Season', 'WTeamID', 'LTeamID']
 
     use_csv_dict = {
         'tourney_cr': 'MNCAATourneyCompactResults.csv',
@@ -20,19 +20,19 @@ def make_train():
         _df = pd.read_csv(file_path)[cols]
         _df['data_from'] = name
 
-        _df1 = _df.rename({
+        _df1 = _df.rename(columns={
             'WTeamID': 'ATeamID',
             'LTeamID': 'BTeamID',
         })
         _df1['is_AWin'] = 1
 
-        _df2 = _df.rename({
+        _df2 = _df.rename(columns={
             'WTeamID': 'BTeamID',
             'LTeamID': 'ATeamID',
         })
         _df2['is_AWin'] = 0
 
-        base_df = pd.concat([_df1, _df2])
+        base_df = pd.concat([_df1, _df2], sort=True)
         ret_df = pd.concat([ret_df, base_df])
 
     ret_df.to_csv(output_path / "train_base.csv", index=False)
