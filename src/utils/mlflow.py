@@ -1,3 +1,4 @@
+from typing import Dict
 from mlflow.tracking import MlflowClient
 
 
@@ -30,5 +31,7 @@ class MlflowWriter():
         self.client.set_terminated(self.run_id)
 
 
-def write_mlflow(writer, cfg, model, results):
-    pass
+def write_mlflow(
+        writer: MlflowWriter,
+        cfg: Dict):
+    writer.log_artifact(cfg["mljar_params"]["results_path"])

@@ -4,12 +4,13 @@ from utils.cfg_yaml import load_config
 import data.make_dataset
 import features
 from train import train_mljar
+from predict import make_submission_csv
 from utils.mlflow import MlflowWriter, write_mlflow
 
 
 def main():
     cfg = load_config('src/config/001.yaml')
-    EXPERIMENT_NAME = 'kaggle_basket_first'
+    EXPERIMENT_NAME = cfg["mljar_params"]["results_path"]
     writer = MlflowWriter(EXPERIMENT_NAME)
 
     # データセットの再生成
@@ -28,11 +29,15 @@ def main():
     train_features = features.build_features(train_base_df, feature_list, is_test=False)
     test_features = features.build_features(test_base_df, feature_list, is_test=True)
 
-    models, results = train_mljar(train_features, cfg)
-    write_mlflow(writer, cfg, models, results)
-    #
-    # make_submission_csv(train, test_features, filename=f'{EXPERIMENT_NAME}.csv')
-    # writer.set_terminated()
+    models = train_mljar(train_features, cfg)
+    make_submission_csv(
+        models,
+        test_features,
+        output_path=f'{EXPERIMENT_NAME}/submission.csv'
+    )
+
+    write_mlflow(writer, cfg)
+    writer.set_terminated()
 
 
 if __name__ == "__main__":

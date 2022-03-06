@@ -8,6 +8,8 @@ def main():
     data.make_base_csv.make_train()
     data.make_base_csv.make_test()
 
+    data.make_base_csv.make_submission()
+
 
 if __name__ == '__main__':
     main()

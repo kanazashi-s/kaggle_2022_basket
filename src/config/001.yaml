@@ -2,9 +2,13 @@ main:
   create_data: True
 
 mljar_params:
+  results_path: "reports/AutoML_Debug"
   mode: "Compete"
   total_time_limit: 300
   explain_level: 2
+
+cv:
+  cv_num: 1
 
 discriminator:
   ndf: 64

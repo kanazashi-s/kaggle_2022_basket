@@ -48,6 +48,16 @@ def make_test():
     sub_df.to_csv(output_path / "test_base.csv", index=False)
 
 
+def make_submission():
+    input_path = Path("data", "raw", "MDataFiles_Stage1")
+    output_path = Path("data", "processed")
+    sub_df = pd.read_csv(input_path / "MSampleSubmissionStage1.csv")
+    sub_df = sub_df.drop("Pred", axis=1)
+
+    sub_df.to_csv(output_path / "submission.csv", index=False)
+
+
 if __name__ == "__main__":
     make_train()
     make_test()
+    make_submission()
