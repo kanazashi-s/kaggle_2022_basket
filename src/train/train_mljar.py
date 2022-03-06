@@ -1,5 +1,5 @@
 from supervised.automl import AutoML
-from cv import get_cv
+from .cv import get_cv
 
 
 def train_mljar(train_features, cfg):
@@ -18,18 +18,10 @@ def train_mljar(train_features, cfg):
         **cfg['mljar_params']
     )
 
-    no_use_cols = [
-        "ATeamID",
-        "BTeamID",
-        "Season",
-        "data_from",
-        "is_AWin",
-    ]
-
-    X = train_features.drop(no_use_cols, axis=1)
+    X = train_features.drop("is_AWin", axis=1)
     y = train_features["is_AWin"]
 
     cv = get_cv(cfg['cv']['cv_num'])
-    automl.fit(X, y, cv=cv,)
+    automl.fit(X=X, y=y, cv=cv,)
 
     return automl

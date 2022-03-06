@@ -1,4 +1,4 @@
-from . import make_cv1
+from .make_cv1 import make_cv1
 
 
 def get_cv(cv_num: int):

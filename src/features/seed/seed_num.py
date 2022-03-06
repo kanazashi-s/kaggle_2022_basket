@@ -4,7 +4,14 @@ from features.base import AbstractBaseBlock
 
 
 class SeedNumBlock(AbstractBaseBlock):
-    def transform(self, input_df: pd.DataFrame):
+    def __init__(self):
+        self.feature_path = Path("features", "seed", "seed_num")
+
+    def transform_create(
+            self,
+            input_df: pd.DataFrame,
+            from_fit: bool = False
+    ):
         output_df = input_df.copy()
 
         input_path = Path("data", "raw", "MDataFiles_Stage1")
@@ -25,4 +32,9 @@ class SeedNumBlock(AbstractBaseBlock):
             how="left"
         )
 
-        return output_df[["ASeed", "BSeed"]]
+        output_df["Seed_diff"] = output_df["ASeed"] - output_df["BSeed"]
+
+        mode = "fit" if from_fit else "transform"
+        self.save_feature_csv(output_df, self.feature_path, mode=mode)
+
+        return output_df[["ASeed", "BSeed", "Seed_diff"]]

@@ -5,7 +5,7 @@ import pandas as pd
 def make_train():
     input_path = Path("data", "raw", "MDataFiles_Stage1")
     output_path = Path("data", "processed")
-    cols = ['Season', 'WTeamID', 'LTeamID']
+    cols = ['Season', 'WTeamID', 'LTeamID', 'DayNum']
 
     use_csv_dict = {
         'tourney_cr': 'MNCAATourneyCompactResults.csv',
