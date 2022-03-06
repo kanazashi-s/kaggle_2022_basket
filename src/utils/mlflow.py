@@ -28,3 +28,7 @@ class MlflowWriter():
 
     def set_terminated(self):
         self.client.set_terminated(self.run_id)
+
+
+def write_mlflow(writer, cfg, model, results):
+    pass

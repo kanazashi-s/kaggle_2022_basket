@@ -1,6 +1,11 @@
 main:
   create_data: True
 
+mljar_params:
+  mode: "Compete"
+  total_time_limit: 300
+  explain_level: 2
+
 discriminator:
   ndf: 64
 
