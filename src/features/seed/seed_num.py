@@ -10,7 +10,8 @@ class SeedNumBlock(AbstractBaseBlock):
     def transform_create(
             self,
             input_df: pd.DataFrame,
-            from_fit: bool = False
+            from_fit: bool = False,
+            is_overwrite: bool = False,
     ):
         output_df = input_df.copy()
 
@@ -33,8 +34,10 @@ class SeedNumBlock(AbstractBaseBlock):
         )
 
         output_df["Seed_diff"] = output_df["ASeed"] - output_df["BSeed"]
+        output_df = output_df[["ASeed", "BSeed", "Seed_diff"]]
 
-        mode = "fit" if from_fit else "transform"
-        self.save_feature_csv(output_df, self.feature_path, mode=mode)
+        if is_overwrite:
+            mode = "fit" if from_fit else "transform"
+            self.save_feature_csv(output_df, self.feature_path, mode=mode)
 
-        return output_df[["ASeed", "BSeed", "Seed_diff"]]
+        return output_df

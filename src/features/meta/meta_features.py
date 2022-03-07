@@ -14,13 +14,15 @@ class MetaFeaturesBlock(AbstractBaseBlock):
     def fit(
             self,
             input_df: pd.DataFrame,
-            is_overwrite: bool = False
+            is_create: bool = False,
+            is_overwrite: bool = False,
     ):
         return input_df["is_AWin"]
 
     def transform(
             self,
             input_df: pd.DataFrame,
+            is_create: bool = False,
             is_overwrite: bool = False,
     ):
         return pd.DataFrame()

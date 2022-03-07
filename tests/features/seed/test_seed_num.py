@@ -11,9 +11,10 @@ def test_seed_num():
     expected = pd.DataFrame({
         "ASeed": [9, 11, 1],
         "BSeed": [9, 3, 12],
+        "Seed_diff": [0, 8, -11]
     })
 
     block = features.seed.seed_num.SeedNumBlock()
-    actual = block.transform(input_df)
+    actual = block.transform(input_df, is_create=True)
 
     assert actual.equals(expected)

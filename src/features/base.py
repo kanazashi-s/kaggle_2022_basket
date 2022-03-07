@@ -10,6 +10,7 @@ class AbstractBaseBlock:
     def fit(
             self,
             input_df: pd.DataFrame,
+            is_create: bool = False,
             is_overwrite: bool = False
     ):
         """
@@ -20,8 +21,8 @@ class AbstractBaseBlock:
             2.a. セーブされたfit特徴量を読み込んでそのまま返す
         """
 
-        if is_overwrite:
-            feature_df = self.fit_create(input_df)
+        if is_create:
+            feature_df = self.fit_create(input_df, is_overwrite=is_overwrite)
         else:
             feature_df = self.read_feature_csv(self.feature_path, mode="fit")
 
@@ -31,12 +32,14 @@ class AbstractBaseBlock:
     def fit_create(
             self,
             input_df: pd.DataFrame,
+            is_overwrite: bool = False,
     ):
-        return self.transform_create(input_df, from_fit=True)
+        return self.transform_create(input_df, from_fit=True, is_overwrite=is_overwrite)
 
     def transform(
             self,
             input_df: pd.DataFrame,
+            is_create: bool = False,
             is_overwrite: bool = False,
     ):
         """
@@ -47,8 +50,8 @@ class AbstractBaseBlock:
             2.a. セーブされたfit特徴量を読み込んでそのまま返す
         """
 
-        if is_overwrite:
-            feature_df = self.transform_create(input_df)
+        if is_create:
+            feature_df = self.transform_create(input_df, is_overwrite=is_overwrite)
         else:
             feature_df = self.read_feature_csv(self.feature_path, mode="transform")
 
@@ -59,6 +62,7 @@ class AbstractBaseBlock:
             self,
             input_df: pd.DataFrame,
             from_fit: bool = False,
+            is_overwrite: bool = False,
     ):
         raise NotImplementedError
 

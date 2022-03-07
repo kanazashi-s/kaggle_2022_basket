@@ -27,18 +27,21 @@ def main():
     feature_list = [
         features.meta.meta_features.MetaFeaturesBlock(),
         features.seed.seed_num.SeedNumBlock(),
+        features.results.regular_win_rate.RegularWinRate(),
     ]
 
     train_features = features.build_features(
         train_base_df,
         feature_list,
         is_test=False,
+        is_create=cfg["main"]["feature_is_create"],
         is_overwrite=cfg["main"]["feature_is_overwrite"]
     )
     test_features = features.build_features(
         test_base_df,
         feature_list,
         is_test=True,
+        is_create=cfg["main"]["feature_is_create"],
         is_overwrite=cfg["main"]["feature_is_overwrite"]
     )
 

@@ -1,1 +1,1 @@
-from . import regular_wl_rate
+from . import regular_win_rate

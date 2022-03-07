@@ -1,7 +1,8 @@
 main:
   create_data: True
   debug: True
-  feature_is_overwrite: False
+  feature_is_create: True
+  feature_is_overwrite: True
 
 mljar_params:
   results_path: "reports/AutoML_Debug"
