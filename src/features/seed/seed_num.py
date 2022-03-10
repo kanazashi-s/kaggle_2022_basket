@@ -3,7 +3,7 @@ import pandas as pd
 from features.base import AbstractBaseBlock
 
 
-class SeedNumBlock(AbstractBaseBlock):
+class SeedNum(AbstractBaseBlock):
     def __init__(self):
         self.feature_path = Path("features", "seed", "seed_num")
 
@@ -32,6 +32,12 @@ class SeedNumBlock(AbstractBaseBlock):
             on=["Season", "BTeamID"],
             how="left"
         )
+
+        if from_fit:
+            output_df.loc[
+                output_df["data_from"] != "tourney_cr",
+                ["ASeed", "BSeed"]
+            ] = None
 
         output_df["Seed_diff"] = output_df["ASeed"] - output_df["BSeed"]
         output_df = output_df[["ASeed", "BSeed", "Seed_diff"]]

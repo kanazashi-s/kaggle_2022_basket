@@ -17,7 +17,7 @@ def build_features(
             out_i = block.transform(base_df, is_create=is_create, is_overwrite=is_overwrite)
         else:
             out_i = block.fit(base_df, is_create=is_create, is_overwrite=is_overwrite)
-
+        assert len(base_df) == len(out_i) or len(out_i) == 0
         out_df = pd.concat([out_df, out_i], axis=1)
 
     return out_df

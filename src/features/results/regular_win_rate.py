@@ -51,7 +51,7 @@ class RegularWinRate(AbstractBaseBlock):
         output_df["ATeamWinRate"] = 0
         train_base_df = pd.read_csv(Path("data", "processed", "train_base.csv"))
 
-        for idx, row in tqdm.tqdm(output_df.iterrows()):
+        for idx, row in tqdm.tqdm(input_df.iterrows()):
 
             a_win_rate = train_base_df.loc[
                 (train_base_df["Season"] == row["Season"]) &

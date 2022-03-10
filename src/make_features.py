@@ -5,10 +5,9 @@ def main():
     train_base_df = features.read_base_df.read_train()
     test_base_df = features.read_base_df.read_test()
 
-    # 学習に使用する特徴量を列挙
+    # 作成する特徴量を選択
     feature_list = [
-        features.seed.seed_num.SeedNumBlock(),
-        features.results.regular_win_rate.RegularWinRate(),
+        features.seed.seed_num.SeedNum()
     ]
 
     features.build_features(

@@ -1,1 +1,2 @@
-from . import tmp
+from . import massey_avg
+from . import rate_538

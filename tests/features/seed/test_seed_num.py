@@ -14,7 +14,7 @@ def test_seed_num():
         "Seed_diff": [0, 8, -11]
     })
 
-    block = features.seed.seed_num.SeedNumBlock()
+    block = features.seed.seed_num.SeedNum()
     actual = block.transform(input_df, is_create=True)
 
     assert actual.equals(expected)

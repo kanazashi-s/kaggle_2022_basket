@@ -26,8 +26,11 @@ def main():
     # 学習に使用する特徴量を列挙
     feature_list = [
         features.meta.meta_features.MetaFeaturesBlock(),
-        features.seed.seed_num.SeedNumBlock(),
+        features.ranking.massey_avg.MasseyAvg(),
+        features.ranking.rate_538.Rate538(),
+        features.seed.seed_num.SeedNum(),
         features.results.regular_win_rate.RegularWinRate(),
+        features.results.regular_point_avg.RegularPointAvg(),
     ]
 
     train_features = features.build_features(
