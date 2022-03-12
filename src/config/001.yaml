@@ -1,13 +1,13 @@
 main:
   create_data: True
-  debug: False
+  debug: True
   feature_is_create: False
   feature_is_overwrite: False
 
 mljar_params:
-  results_path: "reports/AutoML_0310_Perform_With_Proper_Seeds"
+  results_path: "reports/AutoML_Debug"
   mode: "Perform"
-  total_time_limit: 1200
+  total_time_limit: 30
   explain_level: 2
 
 cv:

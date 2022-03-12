@@ -25,7 +25,8 @@ def main():
 
     # 学習に使用する特徴量を列挙
     feature_list = [
-        features.meta.meta_features.MetaFeaturesBlock(),
+        features.meta.meta_features.MetaFeaturesBlock(),  # do not remove
+        features.meta.train_weights.TrainWeights(),  # do not remove
         features.ranking.massey_avg.MasseyAvg(),
         features.ranking.rate_538.Rate538(),
         features.seed.seed_num.SeedNum(),

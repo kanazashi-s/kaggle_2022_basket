@@ -7,7 +7,7 @@ def main():
 
     # 作成する特徴量を選択
     feature_list = [
-        features.seed.seed_num.SeedNum()
+        features.meta.train_weights.TrainWeights()
     ]
 
     features.build_features(

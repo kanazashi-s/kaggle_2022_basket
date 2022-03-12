@@ -18,10 +18,11 @@ def train_mljar(train_features, cfg):
         **cfg['mljar_params']
     )
 
-    X = train_features.drop("is_AWin", axis=1)
+    X = train_features.drop(["is_AWin", "Weights"], axis=1)
     y = train_features["is_AWin"]
+    weights = train_features["Weights"]
 
     cv = get_cv(cfg['cv']['cv_num'])
-    automl.fit(X=X, y=y, cv=cv,)
+    automl.fit(X=X, y=y, sample_weight=weights, cv=cv,)
 
     return automl
