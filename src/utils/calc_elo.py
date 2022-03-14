@@ -31,6 +31,7 @@ class EloRatingCalculator:
 
         self.elo_rating_df.loc[self.elo_rating_df["TeamID"] == team_id] = new_row
         assert self.elo_rating_df["TeamID"].is_unique
+        assert self.elo_rating_df["EloRating"].dtype == float
 
     def add_new_team(self, team_id, season, daynum):
         new_row = pd.DataFrame({
@@ -51,8 +52,9 @@ class EloRatingCalculator:
 
             new_rating = self.elo_rating_df.loc[
                 self.elo_rating_df["TeamID"] == team_id, "EloRating"
-            ] * 0.75 + 1505 * 0.25
+            ].squeeze().item() * 0.75 + 1505 * 0.25
 
+            assert type(new_rating) == float
             self.update_rating(team_id, new_rating, season, daynum)
             assert self.elo_rating_df["TeamID"].is_unique
 
@@ -82,8 +84,10 @@ class EloRatingCalculator:
         else:
             a_s_value, b_s_value = 0, 1
 
-        new_a_rate = (k_value * (a_s_value - a_e_value) + a_rate)
-        new_b_rate = (k_value * (b_s_value - b_e_value) + b_rate)
+        new_a_rate = (k_value * (a_s_value - a_e_value) + a_rate).item()
+        new_b_rate = (k_value * (b_s_value - b_e_value) + b_rate).item()
+
+        assert type(new_a_rate) == float and type(new_b_rate) == float
 
         self.update_rating(match[0], new_a_rate, season, daynum)
         self.update_rating(match[1], new_b_rate, season, daynum)

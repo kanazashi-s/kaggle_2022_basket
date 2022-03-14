@@ -4,7 +4,7 @@ import tqdm
 from features.base import AbstractBaseBlock
 
 
-class RegularPointAvg(AbstractBaseBlock):
+class RegularActionsAvg(AbstractBaseBlock):
     def __init__(self):
         self.feature_path = Path("features", "actions", "regular_actions_avg")
 
@@ -35,11 +35,11 @@ class RegularPointAvg(AbstractBaseBlock):
                 (src_df["Season"] == row["Season"]) &
                 (src_df["DayNum"] < row["DayNum"]) &
                 (src_df["ATeamID"] == row["BTeamID"]),
-                b_features].mean()
+                b_features].mean(axis=0)
 
             output_df.loc[idx, b_features] = b_actions_avg
 
-        output_df = output_df[[a_features + b_features]]
+        output_df = output_df[a_features + b_features]
 
         if is_overwrite:
             mode = "fit"
@@ -74,11 +74,11 @@ class RegularPointAvg(AbstractBaseBlock):
             b_actions_avg = src_df.loc[
                 (src_df["Season"] == row["Season"]) &
                 (src_df["ATeamID"] == row["BTeamID"]),
-                b_features].mean()
+                b_features].mean(axis=0)
 
             output_df.loc[idx, b_features] = b_actions_avg
 
-        output_df = output_df[[a_features + b_features]]
+        output_df = output_df[a_features + b_features]
 
         if is_overwrite:
             mode = "transform"

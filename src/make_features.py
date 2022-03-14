@@ -1,5 +1,6 @@
 import features
 
+
 def main():
     # base_df (シーズン、チームAID、チームBIDの DataFrame )を読み込み
     train_base_df = features.read_base_df.read_train()

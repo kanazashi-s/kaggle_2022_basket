@@ -32,7 +32,8 @@ def main():
         features.seed.seed_num.SeedNum(),
         features.results.regular_win_rate.RegularWinRate(),
         features.results.regular_point_avg.RegularPointAvg(),
-        features.ratings.elo_rating.EloRating()
+        features.ratings.elo_rating.EloRating(),
+        features.actions.regular_actions_avg.RegularActionsAvg(),
     ]
 
     train_features = features.build_features(

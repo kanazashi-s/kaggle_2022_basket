@@ -47,8 +47,6 @@ class EloRating(AbstractBaseBlock):
             if row["data_from"] == "regular":
                 self.save_regular_rating(row["ATeamID"], row["Season"], row["DayNum"], new_a_rate)
                 self.save_regular_rating(row["BTeamID"], row["Season"], row["DayNum"], new_b_rate)
-            else:
-                pass
 
         output_df = output_df[["ATeamEloRating", "BTeamEloRating"]]
         output_df = self.calc_diff(output_df)
@@ -66,9 +64,10 @@ class EloRating(AbstractBaseBlock):
             is_overwrite: bool = False,
     ):
         output_df = input_df.copy()
-        output_df["DayNum"] = 135
+        output_df["DayNum"] = 136
         input_without_duplicates = self.drop_duplicated(output_df)
         input_with_points_df = self.merge_result_points(input_without_duplicates)
+        input_with_points_df = input_with_points_df.sort_values(by=["Season", "DayNum"])
         elo = utils.calc_elo.EloRatingCalculator()
 
         for idx, row in tqdm.tqdm(input_with_points_df.iterrows()):
@@ -133,6 +132,9 @@ class EloRating(AbstractBaseBlock):
         output_df = input_df.copy()
         a_elo_rating = elo.get_rating(team_id=row["ATeamID"])
         b_elo_rating = elo.get_rating(team_id=row["BTeamID"])
+
+        # レートが常識的な範囲内かチェック
+        assert 300 < a_elo_rating < 2700
 
         # home town advantage
         if row["ALoc"] == 1:

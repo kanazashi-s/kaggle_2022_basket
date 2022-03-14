@@ -11,7 +11,7 @@ def test_regular_point_avg_fit():
         "is_AWin": [1, 1, 1, 0, 0, 0],
     })
 
-    block = features.actions()
+    block = features.actions.regular_actions_avg.RegularActionsAvg()
     actual = block.fit(input_df, is_create=True)
 
     assert True
@@ -24,7 +24,7 @@ def test_regular_point_avg_transform():
         "BTeamID": [1229, 1246, 1120],
     })
 
-    block = features.results.regular_point_avg.RegularPointAvg()
+    block = features.actions.regular_actions_avg.RegularActionsAvg()
     actual = block.transform(input_df, is_create=True)
 
     assert True
