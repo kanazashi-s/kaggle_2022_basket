@@ -1,74 +1,32 @@
 import pandas as pd
 import features
 
+block = features.ratings.elo_rating.EloRating()
 
-def test_elo_rating_fit(monkeypatch):
+
+def test_elo_rating_fit():
     input_df = pd.DataFrame({
-        "Season": [1985, 1985, 1985, 1985, 1985, 1985],
-        "ATeamID": [1246, 1120, 1229, 1229, 1246, 1246],
-        "BTeamID": [1229, 1246, 1246, 1246, 1120, 1229],
-        "DayNum": [20, 30, 40, 20, 30, 40],
-        "is_AWin": [1, 1, 1, 0, 0, 0],
+        "Season": [1985, 1985, 1985, 1985, 1985, 1986, 1986, 1986],
+        "ATeamID": [1228, 1106, 1116, 1328, 1228, 1354, 1368, 1328],
+        "BTeamID": [1328, 1354, 1368, 1228, 1328, 1106, 1116, 1228],
+        "DayNum": [20, 25, 30, 35, 135, 140, 20, 25],
+        "is_AWin": [1, 0, 1, 0, 1, 0, 1, 0],
+        "data_from": ["regular", "regular", "regular", "regular", "tourney_cr", "tourney_cr", "regular", "regular"]
     })
 
-    def patch_pd_read_csv(path):
-        dummy_train_base = pd.DataFrame({
-            "Season": [1985, 1985, 1985, 1985, 1985, 1985],
-            "ATeamID": [1246, 1120, 1229, 1229, 1246, 1246],
-            "BTeamID": [1229, 1246, 1246, 1246, 1120, 1229],
-            "DayNum": [20, 30, 40, 20, 30, 40],
-            "is_AWin": [1, 1, 1, 0, 0, 0],
-            "AScore": [50, 30, 50, 0, 20, 10],
-            "BScore": [0, 20, 10, 50, 30, 50],
-        })
-        return dummy_train_base
-
-    expected = pd.DataFrame({
-        "ATeamEloRating": [1300, None, 0, 1300, 50, 35],
-        "BTeamEloRating": [1300, 50, 35, 1300, None, 0],
-    })
-
-    monkeypatch.setattr(
-        "pandas.read_csv",
-        patch_pd_read_csv,
-    )
-
-    block = features.results.regular_point_avg.RegularPointAvg()
+    # block = features.ratings.elo_rating.EloRating()
     actual = block.fit(input_df, is_create=True)
 
     assert len(actual) == len(input_df)
 
 
-def test_regular_point_avg_transform(monkeypatch):
+def test_regular_point_avg_transform():
     input_df = pd.DataFrame({
-        "Season": [1985, 1985, 1985],
-        "ATeamID": [1246, 1120, 1207],
-        "BTeamID": [1229, 1246, 1120],
+        "Season": [1985, 1985, 1985, 1986, 1986, 1986],
+        "ATeamID": [1228, 1106, 1116, 1328, 1354, 1368],
+        "BTeamID": [1328, 1354, 1368, 1228, 1106, 1116],
     })
 
-    def patch_pd_read_csv(path):
-        dummy_train_base = pd.DataFrame({
-            "Season": [1985, 1985, 1985, 1985, 1985, 1985],
-            "ATeamID": [1246, 1120, 1229, 1229, 1246, 1246],
-            "BTeamID": [1229, 1246, 1246, 1246, 1120, 1229],
-            "DayNum": [20, 30, 40, 20, 30, 40],
-            "is_AWin": [1, 1, 1, 0, 0, 0],
-            "AScore": [50, 30, 50, 0, 20, 20],
-            "BScore": [0, 20, 20, 50, 30, 50],
-        })
-        return dummy_train_base
-
-    # expected = pd.DataFrame({
-    #     "ATeamPointAvg": [30, 30, None],
-    #     "BTeamPointAvg": [25, 30, 30],
-    # })
-
-    monkeypatch.setattr(
-        "pandas.read_csv",
-        patch_pd_read_csv,
-    )
-
-    block = features.results.regular_point_avg.RegularPointAvg()
     actual = block.transform(input_df, is_create=True)
 
     assert len(actual) == len(input_df)

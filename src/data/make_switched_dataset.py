@@ -16,14 +16,30 @@ def make_all():
 
     for input_name, output_name in in_out_dict.items():
         input_df = pd.read_csv(input_path / input_name)
-        input_df = input_df.drop("WLoc", axis=1)
+        # input_df = input_df.drop("WLoc", axis=1)
 
         df_1 = input_df.copy()
+
+        df_1["ALoc"] = input_df["WLoc"].map({
+            "H": 1,
+            "N": 0,
+            "A": -1,
+        })
+        df_1["BLoc"] = df_1["ALoc"] * -1
+        df_1 = df_1.drop("WLoc", axis=1)
+
         df_1.columns = df_1.columns.str.replace('^W', 'A', regex=True)
         df_1.columns = df_1.columns.str.replace('^L', 'B', regex=True)
         df_1['is_AWin'] = 1
 
         df_2 = input_df.copy()
+        df_2["ALoc"] = input_df["WLoc"].map({
+            "H": -1,
+            "N": 0,
+            "A": 1,
+        })
+        df_2["BLoc"] = df_2["ALoc"] * -1
+        df_2 = df_2.drop("WLoc", axis=1)
         df_2.columns = df_2.columns.str.replace('^W', 'B', regex=True)
         df_2.columns = df_2.columns.str.replace('^L', 'A', regex=True)
         df_2['is_AWin'] = 0

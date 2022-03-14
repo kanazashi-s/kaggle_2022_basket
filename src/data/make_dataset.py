@@ -10,5 +10,6 @@ def main():
 
     data.make_switched_dataset.make_all()
 
+
 if __name__ == '__main__':
     main()

@@ -7,7 +7,7 @@ def main():
 
     # 作成する特徴量を選択
     feature_list = [
-        features.meta.train_weights.TrainWeights()
+        features.ratings.elo_rating.EloRating()
     ]
 
     features.build_features(
