@@ -13,6 +13,7 @@ def test_regular_win_rate_fit():
     expected = pd.DataFrame({
         "ATeamWinRate": [None, None, None, 1, 0.5],
         "BTeamWinRate": [None, 1, 1, 0, 1],
+        "TeamWinRateDiff": [None, None, None, 1, -0.5]
     })
 
     block = features.results.regular_win_rate.RegularWinRate()
@@ -42,6 +43,7 @@ def test_regular_win_rate_transform(monkeypatch):
     expected = pd.DataFrame({
         "ATeamWinRate": [0.5, 1, 1],
         "BTeamWinRate": [None, 0.5, 1],
+        "TeamWinRateDiff": [None, 0.5, 0]
     })
 
     monkeypatch.setattr(

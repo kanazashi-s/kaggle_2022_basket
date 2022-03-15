@@ -13,13 +13,16 @@ def train_mljar(train_features, cfg):
         results: the path of result files
     """
 
+    task = "regression" if cfg["main"]["is_reg"] else "binary_classification"
     automl = AutoML(
-        ml_task="binary_classification",
+        ml_task=task,
         **cfg['mljar_params']
     )
 
-    X = train_features.drop(["is_AWin", "Weights"], axis=1)
-    y = train_features["is_AWin"]
+    target_col = "PointsDiff" if cfg["main"]["is_reg"] else "is_AWin"
+
+    X = train_features.drop([target_col, "Weights"], axis=1)
+    y = train_features[target_col]
     weights = train_features["Weights"]
 
     cv = get_cv(cfg['cv']['cv_num'])

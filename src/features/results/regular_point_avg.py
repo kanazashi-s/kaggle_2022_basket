@@ -35,7 +35,8 @@ class RegularPointAvg(AbstractBaseBlock):
 
             output_df.loc[idx, "BTeamPointAvg"] = b_point_avg
 
-        output_df = output_df[["ATeamPointAvg", "BTeamPointAvg"]]
+        output_df["TeamPointAvgDiff"] = output_df["ATeamPointAvg"] - output_df["BTeamPointAvg"]
+        output_df = output_df[["ATeamPointAvg", "BTeamPointAvg", "TeamPointAvgDiff"]]
 
         if is_overwrite:
             mode = "fit"
@@ -72,7 +73,8 @@ class RegularPointAvg(AbstractBaseBlock):
 
             output_df.loc[idx, "BTeamPointAvg"] = b_point_avg
 
-        output_df = output_df[["ATeamPointAvg", "BTeamPointAvg"]]
+        output_df["TeamPointAvgDiff"] = output_df["ATeamPointAvg"] - output_df["BTeamPointAvg"]
+        output_df = output_df[["ATeamPointAvg", "BTeamPointAvg", "TeamPointAvgDiff"]]
 
         if is_overwrite:
             mode = "transform"

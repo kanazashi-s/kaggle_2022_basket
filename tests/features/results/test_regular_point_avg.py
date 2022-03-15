@@ -26,6 +26,7 @@ def test_regular_point_avg_fit(monkeypatch):
     expected = pd.DataFrame({
         "ATeamPointAvg": [None, None, 0, None, 50, 35],
         "BTeamPointAvg": [None, 50, 35, None, None, 0],
+        "TeamPointAvgDiff": [None, None, -35, None, None, 35]
     })
 
     monkeypatch.setattr(
@@ -61,6 +62,7 @@ def test_regular_point_avg_transform(monkeypatch):
     expected = pd.DataFrame({
         "ATeamPointAvg": [30, 30, None],
         "BTeamPointAvg": [25, 30, 30],
+        "TeamPointAvgDiff": [5, 0, None]
     })
 
     monkeypatch.setattr(

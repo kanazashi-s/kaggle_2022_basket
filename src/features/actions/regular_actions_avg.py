@@ -21,6 +21,8 @@ class RegularActionsAvg(AbstractBaseBlock):
                       "AOR", "ADR", "AAst", "ATO", "AStl", "ABlk", "APF"]
         b_features = ["BFGM", "BFGA", "BFGM3", "BFGA3", "BFTM", "BFTA",
                       "BOR", "BDR", "BAst", "BTO", "BStl", "BBlk", "BPF"]
+        diff_features = ["DiffFGM", "DiffFGA", "DiffFGM3", "DiffFGA3", "DiffFTM", "DiffFTA",
+                         "DiffBOR", "DiffBDR", "DiffBAst", "DiffBTO", "DiffBStl", "DiffBBlk", "DiffBPF"]
 
         for idx, row in tqdm.tqdm(input_df.iterrows()):
             a_actions_avg = src_df.loc[
@@ -39,7 +41,8 @@ class RegularActionsAvg(AbstractBaseBlock):
 
             output_df.loc[idx, b_features] = b_actions_avg
 
-        output_df = output_df[a_features + b_features]
+        output_df[diff_features] = output_df[a_features].values - output_df[b_features].values
+        output_df = output_df[a_features + b_features + diff_features]
 
         if is_overwrite:
             mode = "fit"
@@ -62,6 +65,8 @@ class RegularActionsAvg(AbstractBaseBlock):
                       "AOR", "ADR", "AAst", "ATO", "AStl", "ABlk", "APF"]
         b_features = ["BFGM", "BFGA", "BFGM3", "BFGA3", "BFTM", "BFTA",
                       "BOR", "BDR", "BAst", "BTO", "BStl", "BBlk", "BPF"]
+        diff_features = ["DiffFGM", "DiffFGA", "DiffFGM3", "DiffFGA3", "DiffFTM", "DiffFTA",
+                         "DiffBOR", "DiffBDR", "DiffBAst", "DiffBTO", "DiffBStl", "DiffBBlk", "DiffBPF"]
 
         for idx, row in tqdm.tqdm(input_df.iterrows()):
             a_actions_avg = src_df.loc[
@@ -78,7 +83,8 @@ class RegularActionsAvg(AbstractBaseBlock):
 
             output_df.loc[idx, b_features] = b_actions_avg
 
-        output_df = output_df[a_features + b_features]
+        output_df[diff_features] = output_df[a_features].values - output_df[b_features].values
+        output_df = output_df[a_features + b_features + diff_features]
 
         if is_overwrite:
             mode = "transform"

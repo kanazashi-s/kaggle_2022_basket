@@ -1,13 +1,14 @@
 main:
-  debug: False
+  debug: True
   create_data: False
   feature_is_create: False
   feature_is_overwrite: False
+  is_reg: False
 
 mljar_params:
   results_path: "reports/AutoML_Elo1"
   mode: "Perform"
-  total_time_limit: 1200
+  total_time_limit: 120
   explain_level: 2
 
 cv:

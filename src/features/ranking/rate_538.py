@@ -38,7 +38,8 @@ class Rate538(AbstractBaseBlock):
             ["ATeamRate538", "BTeamRate538"]
         ] = None
 
-        output_df = output_df[["ATeamRate538", "BTeamRate538"]]
+        output_df["DiffRate538"] = output_df["ATeamRate538"] - output_df["BTeamRate538"]
+        output_df = output_df[["ATeamRate538", "BTeamRate538", "DiffRate538"]]
 
         if is_overwrite:
             mode = "fit"
@@ -72,7 +73,8 @@ class Rate538(AbstractBaseBlock):
         )
         output_df = output_df.rename(columns={"538rating": "BTeamRate538"})
 
-        output_df = output_df[["ATeamRate538", "BTeamRate538"]]
+        output_df["DiffRate538"] = output_df["ATeamRate538"] - output_df["BTeamRate538"]
+        output_df = output_df[["ATeamRate538", "BTeamRate538", "DiffRate538"]]
 
         if is_overwrite:
             mode = "transform"

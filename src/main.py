@@ -36,6 +36,11 @@ def main():
         features.actions.regular_actions_avg.RegularActionsAvg(),
     ]
 
+    if cfg["main"]["is_reg"]:
+        feature_list.append(features.meta.points_diff.PointsDiff())
+    else:
+        feature_list.append(features.meta.meta_features.MetaFeaturesBlock())
+
     train_features = features.build_features(
         train_base_df,
         feature_list,

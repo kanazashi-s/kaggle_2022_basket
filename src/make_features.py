@@ -8,7 +8,7 @@ def main():
 
     # 作成する特徴量を選択
     feature_list = [
-        features.ratings.elo_rating.EloRating()
+        features.ratings.elo_rating.EloRating(),
     ]
 
     features.build_features(

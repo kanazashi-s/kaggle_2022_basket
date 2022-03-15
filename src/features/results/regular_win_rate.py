@@ -33,7 +33,8 @@ class RegularWinRate(AbstractBaseBlock):
 
             output_df.loc[idx, "BTeamWinRate"] = b_win_rate
 
-        output_df = output_df[["ATeamWinRate", "BTeamWinRate"]]
+        output_df["TeamWinRateDiff"] = output_df["ATeamWinRate"] - output_df["BTeamWinRate"]
+        output_df = output_df[["ATeamWinRate", "BTeamWinRate", "TeamWinRateDiff"]]
 
         if is_overwrite:
             mode = "fit"
@@ -69,7 +70,8 @@ class RegularWinRate(AbstractBaseBlock):
 
             output_df.loc[idx, "BTeamWinRate"] = b_win_rate
 
-        output_df = output_df[["ATeamWinRate", "BTeamWinRate"]]
+        output_df["TeamWinRateDiff"] = output_df["ATeamWinRate"] - output_df["BTeamWinRate"]
+        output_df = output_df[["ATeamWinRate", "BTeamWinRate", "TeamWinRateDiff"]]
 
         if is_overwrite:
             mode = "transform"

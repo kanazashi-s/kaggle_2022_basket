@@ -14,7 +14,7 @@ def test_regular_point_avg_fit():
     block = features.actions.regular_actions_avg.RegularActionsAvg()
     actual = block.fit(input_df, is_create=True)
 
-    assert True
+    assert len(actual) == len(input_df)
 
 
 def test_regular_point_avg_transform():
@@ -27,4 +27,4 @@ def test_regular_point_avg_transform():
     block = features.actions.regular_actions_avg.RegularActionsAvg()
     actual = block.transform(input_df, is_create=True)
 
-    assert True
+    assert len(actual) == len(input_df)

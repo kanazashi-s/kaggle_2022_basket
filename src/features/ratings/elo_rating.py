@@ -127,11 +127,21 @@ class EloRating(AbstractBaseBlock):
             output_df[["AScore", "BScore", "ALoc", "BLoc"]] += scores_df
         return output_df
 
-    @staticmethod
-    def record_elo_rating(input_df, row, elo):
+    def record_elo_rating(self, input_df, row, elo):
         output_df = input_df.copy()
-        a_elo_rating = elo.get_rating(team_id=row["ATeamID"])
-        b_elo_rating = elo.get_rating(team_id=row["BTeamID"])
+
+        if row["DayNum"] <= 135:
+            a_elo_rating = elo.get_rating(team_id=row["ATeamID"])
+            b_elo_rating = elo.get_rating(team_id=row["BTeamID"])
+        else:
+            a_elo_rating = self.regular_final_rating.loc[
+                (self.regular_final_rating["TeamID"] == row["ATeamID"]) &
+                (self.regular_final_rating["Season"] == row["Season"]),
+            "EloRating"].squeeze()
+            b_elo_rating = self.regular_final_rating.loc[
+                (self.regular_final_rating["TeamID"] == row["BTeamID"]) &
+                (self.regular_final_rating["Season"] == row["Season"]),
+            "EloRating"].squeeze()
 
         # レートが常識的な範囲内かチェック
         assert 300 < a_elo_rating < 2700
