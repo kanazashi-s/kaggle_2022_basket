@@ -16,6 +16,7 @@ def train_mljar(train_features, cfg):
     task = "regression" if cfg["main"]["is_reg"] else "binary_classification"
     automl = AutoML(
         ml_task=task,
+        validation_strategy={"validation_type": "custom"},
         **cfg['mljar_params']
     )
 
@@ -26,6 +27,6 @@ def train_mljar(train_features, cfg):
     weights = train_features["Weights"]
 
     cv = get_cv(cfg['cv']['cv_num'])
-    automl.fit(X=X, y=y, sample_weight=weights, cv=cv,)
+    automl.fit(X=X, y=y, sample_weight=weights, cv=cv)
 
     return automl

@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def make_all():
-    input_file = Path("data", "raw", "MDataFiles_Stage1", "MMasseyOrdinals.csv")
+    input_file = Path("data", "raw", "MDataFiles_Stage2", "MMasseyOrdinals_Season2022_Day133_59systems.csv")
     output_path = Path("data", "processed", "massey")
     os.makedirs(output_path, exist_ok=True)
 

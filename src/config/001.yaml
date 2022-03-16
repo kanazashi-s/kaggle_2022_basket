@@ -1,15 +1,61 @@
 main:
-  debug: True
+  debug: False
   create_data: False
   feature_is_create: False
   feature_is_overwrite: False
   is_reg: False
 
 mljar_params:
-  results_path: "reports/AutoML_Elo1"
+  results_path: "reports/AutoML_Perform"
   mode: "Perform"
-  total_time_limit: 120
+  total_time_limit: 10800
   explain_level: 2
+  kmeans_features: True
+
+weight:
+  tourney_weight: 5
+  year_weight_rate: 0.05
+  year_weight_base: 1.5
 
 cv:
   cv_num: 1
+
+use_features: [
+    "MasseyAvgDiffSAG",
+    "MasseyAvgDiffDOK",
+    "MasseyAvgDiffSMS",
+    "MasseyAvgDiffDAV",
+    "MasseyAvgDiffPGH",
+    "MasseyAvgDiffWIL",
+    "MasseyAvgDiffSFX",
+    "MasseyAvgDiffTRP",
+    "MasseyAvgDiffJNG",
+    "MasseyAvgDiffMAS",
+    "MasseyAvgDiffFAS",
+    "MasseyAvgDiffINC",
+    "MasseyAvgDiffBWE",
+    "MasseyAvgDiffEBP",
+    "MasseyAvgDiffPOM",
+    "MasseyAvgDiffHAS",
+    "MasseyAvgDiffKPK",
+    "MasseyAvgDiffDII",
+    "MasseyAvgDiffMOR",
+    "MasseyAvgDiffTRK",
+    "Seed_diff",
+    "TeamWinRateDiff",
+    "TeamPointAvgDiff",
+    "EloRatingDiff",
+    "DiffFGM",
+    "DiffFGA",
+    "DiffFGM3",
+    "DiffFGA3",
+    "DiffFTM",
+    "DiffFTA",
+    "DiffBOR",
+    "DiffBDR",
+    "DiffBAst",
+    "DiffBTO",
+    "DiffBStl",
+    "DiffBBlk",
+    "DiffBPF"
+]

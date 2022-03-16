@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def make_train():
-    input_path = Path("data", "raw", "MDataFiles_Stage1")
+    input_path = Path("data", "raw", "MDataFiles_Stage2")
     output_path = Path("data", "processed")
     cols = ['Season', 'WTeamID', 'LTeamID', 'DayNum']
 
@@ -39,9 +39,9 @@ def make_train():
 
 
 def make_test():
-    input_path = Path("data", "raw", "MDataFiles_Stage1")
+    input_path = Path("data", "raw", "MDataFiles_Stage2")
     output_path = Path("data", "processed")
-    s_sub_df = pd.read_csv(input_path / "MSampleSubmissionStage1.csv")
+    s_sub_df = pd.read_csv(input_path / "MSampleSubmissionStage2.csv")
     sub_df = s_sub_df['ID'].str.split(pat='_', expand=True).astype(int)
     sub_df.columns = ['Season', 'ATeamID', 'BTeamID']
 
@@ -49,9 +49,9 @@ def make_test():
 
 
 def make_submission():
-    input_path = Path("data", "raw", "MDataFiles_Stage1")
+    input_path = Path("data", "raw", "MDataFiles_Stage2")
     output_path = Path("data", "processed")
-    sub_df = pd.read_csv(input_path / "MSampleSubmissionStage1.csv")
+    sub_df = pd.read_csv(input_path / "MSampleSubmissionStage2.csv")
     sub_df = sub_df.drop("Pred", axis=1)
 
     sub_df.to_csv(output_path / "submission.csv", index=False)

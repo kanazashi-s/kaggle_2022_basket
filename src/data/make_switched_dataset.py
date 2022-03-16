@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def make_all():
-    input_path = Path("data", "raw", "MDataFiles_Stage1")
+    input_path = Path("data", "raw", "MDataFiles_Stage2")
     output_path = Path("data", "processed")
 
     in_out_dict = {

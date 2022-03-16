@@ -6,9 +6,19 @@ def main():
     train_base_df = features.read_base_df.read_train()
     test_base_df = features.read_base_df.read_test()
 
-    # 作成する特徴量を選択
     feature_list = [
+        features.meta.train_weights.TrainWeights(
+            tourney_weight=1,
+            year_weight_rate=0.05,
+            year_weight_base=1.5
+        ),  # do not remove
+        # features.ranking.massey_avg.MasseyAvg(),
+        # features.ranking.rate_538.Rate538(),
+        features.seed.seed_num.SeedNum(),
+        features.results.regular_win_rate.RegularWinRate(),
+        features.results.regular_point_avg.RegularPointAvg(),
         features.ratings.elo_rating.EloRating(),
+        features.actions.regular_actions_avg.RegularActionsAvg(),
     ]
 
     features.build_features(

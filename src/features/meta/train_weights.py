@@ -5,7 +5,7 @@ from features.base import AbstractBaseBlock
 class TrainWeights(AbstractBaseBlock):
     def __init__(
             self,
-            tourney_weight: int = 5,
+            tourney_weight: int = 1,
             year_weight_rate: float = 0.05,
             year_weight_base: float = 1.5,
     ):

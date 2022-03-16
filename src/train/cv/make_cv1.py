@@ -1,3 +1,4 @@
+import pickle
 from typing import List
 from pathlib import Path
 import pandas as pd
@@ -70,4 +71,7 @@ def filter_ncaa_teams(base_df):
 
 if __name__ == "__main__":
     ret = make_cv1()
+    with open("models/cv_list.pkl", "wb") as f:
+        pickle.dump(ret, f)
+    
     print("end")

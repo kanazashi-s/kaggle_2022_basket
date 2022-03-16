@@ -1,3 +1,4 @@
+import itertools
 import os, shutil
 import data.make_dataset
 import features
@@ -25,8 +26,7 @@ def main():
 
     # 学習に使用する特徴量を列挙
     feature_list = [
-        features.meta.meta_features.MetaFeaturesBlock(),  # do not remove
-        features.meta.train_weights.TrainWeights(),  # do not remove
+        features.meta.train_weights.TrainWeights(**cfg["weight"]),  # do not remove
         features.ranking.massey_avg.MasseyAvg(),
         features.ranking.rate_538.Rate538(),
         features.seed.seed_num.SeedNum(),
@@ -47,14 +47,14 @@ def main():
         is_test=False,
         is_create=cfg["main"]["feature_is_create"],
         is_overwrite=cfg["main"]["feature_is_overwrite"]
-    )
+    )[cfg["use_features"] + ["is_AWin", "Weights"]]
     test_features = features.build_features(
         test_base_df,
         feature_list,
         is_test=True,
         is_create=cfg["main"]["feature_is_create"],
         is_overwrite=cfg["main"]["feature_is_overwrite"]
-    )
+    )[cfg["use_features"]]
 
     models = train_mljar(train_features, cfg)
     make_submission_csv(
