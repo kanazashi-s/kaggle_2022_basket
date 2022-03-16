@@ -15,10 +15,10 @@ def main():
         # features.ranking.massey_avg.MasseyAvg(),
         # features.ranking.rate_538.Rate538(),
         features.seed.seed_num.SeedNum(),
-        features.results.regular_win_rate.RegularWinRate(),
-        features.results.regular_point_avg.RegularPointAvg(),
-        features.ratings.elo_rating.EloRating(),
-        features.actions.regular_actions_avg.RegularActionsAvg(),
+        # features.results.regular_win_rate.RegularWinRate(),
+        # features.results.regular_point_avg.RegularPointAvg(),
+        # features.ratings.elo_rating.EloRating(),
+        # features.actions.regular_actions_avg.RegularActionsAvg(),
     ]
 
     features.build_features(

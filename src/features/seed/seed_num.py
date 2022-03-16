@@ -15,7 +15,7 @@ class SeedNum(AbstractBaseBlock):
     ):
         output_df = input_df.copy()
 
-        input_path = Path("data", "raw", "MDataFiles_Stage1")
+        input_path = Path("data", "raw", "MDataFiles_Stage2")
         df_seeds = pd.read_csv(input_path / "MNCAATourneySeeds.csv")
         df_seeds["Seed"] = df_seeds["Seed"].str[1:3].astype(int)
 

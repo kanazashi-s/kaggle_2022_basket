@@ -1,4 +1,4 @@
-import itertools
+import pickle
 import os, shutil
 import data.make_dataset
 import features
@@ -55,6 +55,12 @@ def main():
         is_create=cfg["main"]["feature_is_create"],
         is_overwrite=cfg["main"]["feature_is_overwrite"]
     )[cfg["use_features"]]
+
+    with open("train_features.pkl", "wb") as f:
+        pickle.dump(train_features, f)
+
+    with open("test_features.pkl", "wb") as f:
+        pickle.dump(test_features, f)
 
     models = train_mljar(train_features, cfg)
     make_submission_csv(

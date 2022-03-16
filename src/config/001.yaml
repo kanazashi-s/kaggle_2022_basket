@@ -1,5 +1,5 @@
 main:
-  debug: False
+  debug: True
   create_data: False
   feature_is_create: False
   feature_is_overwrite: False
@@ -8,7 +8,7 @@ main:
 mljar_params:
   results_path: "reports/AutoML_Perform"
   mode: "Perform"
-  total_time_limit: 10800
+  total_time_limit: 180
   explain_level: 2
   kmeans_features: True
 
@@ -42,6 +42,7 @@ use_features: [
     "MasseyAvgDiffMOR",
     "MasseyAvgDiffTRK",
     "Seed_diff",
+    "DiffRate538",
     "TeamWinRateDiff",
     "TeamPointAvgDiff",
     "EloRatingDiff",

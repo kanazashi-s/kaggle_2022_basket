@@ -4,10 +4,10 @@ from sklearn.metrics import log_loss
 
 
 def main():
-    with open("reports/AutoML_Elo1/train_features.pkl", "rb") as f:
+    with open("train_features.pkl", "rb") as f:
         train_features = pickle.load(f)
 
-    with open("reports/AutoML_Elo1/test_features.pkl", "rb") as f:
+    with open("test_features.pkl", "rb") as f:
         test_features = pickle.load(f)
 
     with open("models/cv_list.pkl", "rb") as f:
